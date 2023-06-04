@@ -8,16 +8,17 @@ type Props = {
     children: React.ReactNode;
 }
 
-const ProductContext = React.createContext<null | Product[]>(null);
+export const ProductContext = React.createContext< Product[]>([]);
 
 const ProductContextProvider = ({ children }: Props) => {
     const [products, setProducts] = useState<Product[]>([]);
+    const getProducts = async()=>{
+        setProducts(await fetchData())
+    }
+
     useEffect(() => {
-        async () => {
-            setProducts(await fetchData());
-        }
+       getProducts()
     }, [])
-    
     return (
         <ProductContext.Provider value={products}>
             {children}
