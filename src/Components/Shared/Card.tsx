@@ -23,12 +23,13 @@ const Card = (props: Props) => {
                         cartContext.state.selectedItems.findIndex(item => item.id === id) === -1 ?
                             <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { price, id, title, image } })}>Add to cart</button>
                             : cartContext.state.selectedItems[cartContext.state.selectedItems.findIndex(item => item.id === id)].quantity === 1 ?
-                                <> <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { price, id, title, image } })}>+</button>
-                                    <button onClick={() => cartContext.dispatch({ type: "DECREASE", payload: { image, price, title, id } })}> TRASH </button>
+                            <>
+                            <button onClick={() => cartContext.dispatch({ type: "DECREASE", payload: { image, price, title, id } })}> TRASH </button>
+                             <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { price, id, title, image } })}>+</button>
                                 </>
                                 : <>
-                                    <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { image, price, title, id } })}> + </button>
                                     <button onClick={() => cartContext.dispatch({ type: 'DECREASE', payload: { id, image, title, price } })}> - </button>
+                                    <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { image, price, title, id } })}> + </button>
                                 </>
                     }
                 </div>
