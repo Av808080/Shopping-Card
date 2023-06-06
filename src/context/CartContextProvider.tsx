@@ -7,7 +7,7 @@ const initialState: State = {
     countItems: 0,
     isCheckOut: false,
 }
-const reducer = (state: State, action: Action): State => {
+const reducer = (state: State, action: Action): State => {  
     switch (action.type) {
         case "CHECKOUT":
             return { ...initialState, isCheckOut: true }
@@ -18,16 +18,20 @@ const reducer = (state: State, action: Action): State => {
             if (index === -1)
                 state.selectedItems.push({ ...action.payload, quantity: 1 })
             else
-                ++state.selectedItems[index].quantity             
-            return state;
+                state.selectedItems[index].quantity++; 
+            return {...state , selectedItems:[...state.selectedItems]};
         case "DECREASE":
             const indexD = state.selectedItems.findIndex(item => item.id === action.payload.id)
-            if (indexD === -1)
-                return state
+            if (state.selectedItems[indexD].quantity === 1 ){
+               const newSelectedItems = state.selectedItems.filter(item=> item.id !== action.payload.id)
+                return {...state , selectedItems:[...newSelectedItems] }
+            }
             else
                 if (!(state.selectedItems[indexD].quantity < 1))
-                    --state.selectedItems[indexD].quantity
-            return state;
+                    --state.selectedItems[indexD].quantity;
+                // else 
+                    // state.selectedItems[indexD]
+            return {...state , selectedItems:[...state.selectedItems]};
         default: return initialState;
     }
 }
