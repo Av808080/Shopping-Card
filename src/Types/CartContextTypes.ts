@@ -7,7 +7,7 @@ export type State = {
         quantity: number
     }[];
     total: number;
-    countItems: number;
+    itemsCounter: number;
     isCheckOut: boolean;
 }
 
@@ -23,4 +23,9 @@ export type Action = {
 }
 export type Props = {
     children:React.ReactNode
+}
+ 
+export type Context = {
+    dispatch: (action: Action) => void;
+    state: State;
 }
