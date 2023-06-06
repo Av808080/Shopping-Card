@@ -8,17 +8,29 @@ type Props = {
 const Card = (props: Props) => {
     const cartContext = useContext(CartContext);
     const { title, image, price, id } = props.data;
+    // console.log(cartContext.state);
 
     return (
         <div>
-
             <img src={image} alt="" width={100} height={100} />
             <h3>{title.split(" ", 2).join(" ")}</h3>
             <p>{price}</p>
             <div>
                 <Link to={`/products/${id}`}>Details</Link>
                 <div>
-                    <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { id, image, price, title } })} >Add to cart</button>
+
+                    {
+                        cartContext.state.selectedItems.findIndex(item => item.id === id) === -1 ?
+                            <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { price, id, title, image } })}>Add to cart</button>
+                            : cartContext.state.selectedItems[cartContext.state.selectedItems.findIndex(item => item.id === id)].quantity === 1 ?
+                                <> <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { price, id, title, image } })}>+</button>
+                                    <button onClick={() => cartContext.dispatch({ type: "DECREASE", payload: { image, price, title, id } })}> TRASH </button>
+                                </>
+                                : <>
+                                    <button onClick={() => cartContext.dispatch({ type: "INCREASE", payload: { image, price, title, id } })}> + </button>
+                                    <button onClick={() => cartContext.dispatch({ type: 'DECREASE', payload: { id, image, title, price } })}> - </button>
+                                </>
+                    }
                 </div>
             </div>
         </div>
