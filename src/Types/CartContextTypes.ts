@@ -12,7 +12,7 @@ export type State = {
 }
 
 export type Action = {
-    payload: {
+    payload?: {
         id: number;
         image: string;
         price: number;
