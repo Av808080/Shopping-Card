@@ -1,0 +1,34 @@
+.img {
+  width: 400px;
+  display: block;
+  margin: auto;
+  margin-top: 50px;
+}
+.backLink {
+  text-decoration: none;
+  background-color: #2752d6;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: #e4e4e4;
+  transition: 200ms;
+  &:hover {
+    box-shadow: inset 100px 100px 100px #a5c2f1;
+    color: #141414;
+  }
+}
+.text {
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+}
+.alert {
+  margin-bottom: 30px;
+}
+@media (max-width: 480px) {
+  .img {
+    width: 200px;
+  }
+  .text {
+    font-size: 1.6em;
+  }
+}
